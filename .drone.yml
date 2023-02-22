@@ -10,6 +10,7 @@ steps:
       from_secret: access_token
     repo: bradbot1/gitea-forwarder
     tags: latest
+    auto_tag: true
 
 trigger:
   branch:
