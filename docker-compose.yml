@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  forwarder:
+    build: .
+    image: bradbot1/gitea-forwarder
+    ports:
+      - '80:80'
+    environment:
+      PORT: 80
+      # if you want ssl
+      #SSL_CERT_PATH:
+      #SSL_KEY_PATH:
+      #SSL_PASSWORD:
+    volumes:
+      - ./data.json:./data.json

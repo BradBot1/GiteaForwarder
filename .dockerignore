@@ -1,0 +1,7 @@
+node_modules/
+temp/
+package-lock.json
+Dockerfile
+docker-compose.yml
+data.json
+.gitignore
