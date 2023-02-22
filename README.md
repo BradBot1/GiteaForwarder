@@ -4,7 +4,7 @@ A simple way to mirror repositories on gitea
 
 ## How to use
 
-Just follow the [examples](#Examples) detailed below
+Just follow the [examples](#examples) detailed below
 
 ## Environment Variables
 
