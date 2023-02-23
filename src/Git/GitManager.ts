@@ -18,7 +18,7 @@ import { simpleGit as Git } from 'simple-git';
 import { GitAuthor } from './GitAuthor';
 import { Recipient } from '../Forward/Recipient';
 import { execSync } from 'child_process';
-import { writeFileSync } from 'fs'
+import { writeFileSync, existsSync, readFileSync } from 'fs'
 
 export async function cloneRepo(repo: string, out: string = __dirname): Promise<void> {
     try {
@@ -83,8 +83,9 @@ export async function changeCommitAuthors(recipient: Recipient, out: string = __
     }
 }
 
-export async function handleForward(forward: Forward):Promise<void> {
-    const git = Git().env('GIT_SSH_COMMAND', 'ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no');
-    await git.clone(forward.origin);
-    git.log()
+export async function insertToReadme(projectName: string, projectLink: string, out: string = __dirname): Promise<void> {
+    const git = Git(out);
+    var data: string = `> This was cloned from [${projectName}](${projectLink})`;
+    if (existsSync(out + "README.md")) data = data + readFileSync(out + "README.md").toString();
+    writeFileSync(out + "README.md", data);
 }

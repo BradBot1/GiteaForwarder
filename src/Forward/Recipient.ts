@@ -18,6 +18,7 @@ import { GitAuthor } from '../Git/GitAuthor';
 export class Recipient {
 
     public readonly humanName: string;
+    public insertToReadme: boolean = false;
     public readonly url:string;
     public authorMap: Map<string, GitAuthor> = new Map<string, GitAuthor>();
 

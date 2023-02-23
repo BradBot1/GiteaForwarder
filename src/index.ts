@@ -17,7 +17,7 @@ import { Forward } from './Forward/Forward';
 import { createForward, getForwardByWebhook } from './Forward/ForwardManager';
 import { createServer } from './Server/Server';
 import { env, cwd } from 'process';
-import { cloneRepo, changeCommitAuthors, push } from './Git/GitManager';
+import { cloneRepo, changeCommitAuthors, push, insertToReadme } from './Git/GitManager';
 import { rmSync, existsSync, readFileSync } from 'fs'
 
 var dataToLoad: string;
@@ -56,6 +56,7 @@ for (const forwardData of parsedData) {
                 continue;
             }
             const recipient = forward.createRecipient(recipientData.url, recipientData.humanName);
+            if (recipient.hasOwnProperty("modifyReadme")) recipient.insertToReadme = !!recipientData.modifyReadme;
             if (!recipientData.hasOwnProperty("authors")) {
                 console.error("No authors provided for recipient: " + recipient.humanName||recipient.url);
                 continue;
@@ -95,6 +96,7 @@ createServer(parseInt(env["PORT"]||"3000"), async (webhookId: string, webhookDat
     for (const sendTo of forward.getRecipients()) {
         await cloneRepo(forward.origin, outputDir);
         await changeCommitAuthors(sendTo, outputDir);
+        if (sendTo.insertToReadme) await insertToReadme(webhookData.repository.full_name, webhookData.repository.html_url, outputDir);
         await push(sendTo.url, outputDir);
         rmSync(outputDir, {
             recursive: true,
