@@ -88,6 +88,7 @@ export async function insertToReadme(projectName: string, projectLink: string, o
     var data: string = `> This was cloned from [${projectName}](${projectLink})\n`;
     if (existsSync(out + "README.md")) data = data + readFileSync(out + "README.md").toString();
     writeFileSync(out + "README.md", data);
+    await git.add("README.md")
     await git.commit("Modify README.md", "README.md", {
         "--author": '"BradBot1 <BradBot_1@email.com>"'
     });
