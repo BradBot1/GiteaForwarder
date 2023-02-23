@@ -43,5 +43,7 @@ export function createForward(origin: string, webhook: string|undefined): Forwar
             webhook = generateRandomWebhookId();
         } while (getForwardByWebhook(webhook) != null);
     }
-    return new Forward(webhook, origin);
+    const forward = new Forward(webhook, origin);
+    known_forwards.push(forward);
+    return forward;
 };
