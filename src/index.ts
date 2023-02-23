@@ -85,7 +85,7 @@ createServer(parseInt(env["PORT"]||"3000"), async (webhookId: string, webhookDat
     const forward: Forward|null = getForwardByWebhook(webhookId);
     if (forward == null) return;
     if (!webhookData.hasOwnProperty("repository")) return;
-    const url: any = webhookData.repository.clone_url || webhookData.repository.ssh_url || webhookData.repository.html_url;
+    const url: any = webhookData.repository.ssh_url || webhookData.repository.clone_url || webhookData.repository.html_url;
     if (typeof url !== "string" || forward.origin !== url) {
         console.log("[VAL] Invalid webhook origin!");
         return;
