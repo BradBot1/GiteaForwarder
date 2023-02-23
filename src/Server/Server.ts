@@ -23,11 +23,11 @@ export function createServer(port: number, webhookRecievedCallback: WebhookRecie
             res.end('{"error":"route_not_found",message:"There route requested does not exist!"}');
         },
         // router: require('find-my-way')(),
-        server: require('low-http-server')({
+        /*server: require('low-http-server')({
             cert_file_name: process.env["SSL_CERT_PATH"],
             key_file_name: process.env["SSL_KEY_PATH"],
             password: process.env["SSL_PASSWORD"]
-        })
+        })*/
     });
 
     router.use(require('body-parser').json({
