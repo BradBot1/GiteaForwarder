@@ -12,5 +12,7 @@ services:
       #SSL_CERT_PATH:
       #SSL_KEY_PATH:
       #SSL_PASSWORD:
+      README_NAME: GiteaForwarder
+      README_EMAIL: donotreply@bb1.fun
     volumes:
       - ./data.json:./data.json
