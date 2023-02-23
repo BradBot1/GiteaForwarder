@@ -81,14 +81,12 @@ for (const forwardData of parsedData) {
     }
 }
 
-createServer(parseInt(env["PORT"]||"3000"), async (webhookId: string, webhook: Promise<any>) => {
+createServer(parseInt(env["PORT"]||"3000"), async (webhookId: string, webhookData: any) => {
     const forward: Forward|null = getForwardByWebhook(webhookId);
     if (forward == null) return;
-    const webhookData: any = await webhook;
     if (!webhookData.hasOwnProperty("repository")) return;
     const url: any = webhookData.repository.clone_url || webhookData.repository.ssh_url || webhookData.repository.html_url;
-    if (typeof url !== "string") return;
-    if (forward.origin !== url) {
+    if (typeof url !== "string" || forward.origin !== url) {
         console.log("[VAL] Invalid webhook origin!");
         return;
     }
