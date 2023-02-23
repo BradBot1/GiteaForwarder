@@ -21,4 +21,6 @@ RUN npm run build
 RUN rm ./src/ -fr
 RUN rm tsconfig.json
 
+RUN chmod +x ./start.sh
+
 ENTRYPOINT [ "./start.sh" ]
