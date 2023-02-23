@@ -36,6 +36,15 @@ The password for the SSL certification, no default
 
 Environment version of [data.json](https://git.bb1.fun/BradBot_1/GiteaForwarder/src/branch/master/data.json), no default
 
+### `README_NAME`
+
+The name of the user that will commit the readme changes (if enabled), defaults to GiteaForwarder
+
+### `README_EMAIL`
+
+The email of the user that will commit the readme changes (if enabled), defaults to donotreply@bb1.fun
+
+
 ## Examples
 
 ### Docker run
@@ -43,13 +52,13 @@ Environment version of [data.json](https://git.bb1.fun/BradBot_1/GiteaForwarder/
 #### With an environment variable
 
 ```shell
-docker run --name forwarder -e PORT=80 -e DATA='[{"origin":"https://git.example.com/user/repo","recipients":[{"modifyReadme":true,"url":"https://gitlab.com/user/repo","authors":[{"old":"user@example.com","email":"00000000+user@users.noreply.github.com","name":"user"}]}]}]' -p 80:80 -d bradbot1/gitea-forwarder
+docker run --name forwarder -e PORT=80 -e README_NAME=GiteaForwarder -e README_EMAIL=donotreply@bb1.fun -e DATA='[{"origin":"https://git.example.com/user/repo","recipients":[{"modifyReadme":true,"url":"https://gitlab.com/user/repo","authors":[{"old":"user@example.com","email":"00000000+user@users.noreply.github.com","name":"user"}]}]}]' -p 80:80 -d bradbot1/gitea-forwarder
 ```
 
 #### With a volume mount (preffered)
 
 ```shell
-docker run --name forwarder -e PORT=80 -v ./data.json:./data.json -p 80:80 -d bradbot1/gitea-forwarder
+docker run --name forwarder -e PORT=80 -e README_NAME=GiteaForwarder -e README_EMAIL=donotreply@bb1.fun -v ./data.json:./data.json -p 80:80 -d bradbot1/gitea-forwarder
 ```
 
 You can find an example of [data.json here](https://git.bb1.fun/BradBot_1/GiteaForwarder/src/branch/master/data.json)
@@ -69,6 +78,8 @@ services:
     environment:
       PORT: 80
       DATA: '[{"origin":"https://git.example.com/user/repo","recipients":[{"url":"https://gitlab.com/user/repo","authors":[{"old":"user@example.com","email":"00000000+user@users.noreply.github.com","name":"user"}]}]}]'
+      README_NAME: GiteaForwarder
+      README_EMAIL: donotreply@bb1.fun
 ```
 
 #### With a volume mount (preffered)
@@ -78,11 +89,14 @@ version: '3'
 
 services:
   forwarder:
+    build: .
     image: bradbot1/gitea-forwarder
     ports:
       - '80:80'
     environment:
       PORT: 80
+      README_NAME: GiteaForwarder
+      README_EMAIL: donotreply@bb1.fun
     volumes:
       - ./data.json:./data.json
 ```
