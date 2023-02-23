@@ -32,7 +32,7 @@ export async function cloneRepo(repo: string, out: string = __dirname): Promise<
 export async function push(repo: string, out: string = __dirname): Promise<void> {
     const git = Git(out);
     git.addRemote("fumo", repo);
-    await git.push(["fumo", "-force"]);
+    await git.push(["fumo", "--force"]);
 }
 
 export async function getCommitAuthors(out: string = __dirname): Promise<string[]> {
