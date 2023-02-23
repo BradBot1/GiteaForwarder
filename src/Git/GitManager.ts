@@ -32,7 +32,7 @@ export async function cloneRepo(repo: string, out: string = __dirname): Promise<
 export async function push(repo: string, out: string = __dirname): Promise<void> {
     const git = Git(out);
     git.addRemote("fumo", repo);
-    await git.push("fumo");
+    await git.push(["fumo", "-force"]);
 }
 
 export async function getCommitAuthors(out: string = __dirname): Promise<string[]> {
@@ -88,4 +88,7 @@ export async function insertToReadme(projectName: string, projectLink: string, o
     var data: string = `> This was cloned from [${projectName}](${projectLink})\n`;
     if (existsSync(out + "README.md")) data = data + readFileSync(out + "README.md").toString();
     writeFileSync(out + "README.md", data);
+    await git.commit("Modify README.md", "README.md", {
+        "--author": '"BradBot1 <BradBot_1@email.com>"'
+    });
 }
