@@ -56,7 +56,10 @@ for (const forwardData of parsedData) {
                 continue;
             }
             const recipient = forward.createRecipient(recipientData.url, recipientData.humanName);
-            if (recipient.hasOwnProperty("modifyReadme")) recipient.insertToReadme = !!recipientData.modifyReadme;
+            if (recipient.hasOwnProperty("modifyReadme")) {
+                recipient.insertToReadme = !!recipientData.modifyReadme;
+                console.log("Readme will be modified on recipient: " + recipient.humanName||recipient.url);
+            }
             if (!recipientData.hasOwnProperty("authors")) {
                 console.error("No authors provided for recipient: " + recipient.humanName||recipient.url);
                 continue;
