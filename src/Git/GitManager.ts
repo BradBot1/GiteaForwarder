@@ -84,12 +84,12 @@ export async function changeCommitAuthors(recipient: Recipient, out: string = __
 }
 
 export async function insertToReadme(projectName: string, projectLink: string, out: string = __dirname): Promise<void> {
-    const git = Git(out);
+    const git = Git(out).addConfig('user.email', 'BradBot_1@outlook.com').addConfig('user.name', 'BradBot1');
     var data: string = `> This was cloned from [${projectName}](${projectLink})\n`;
     if (existsSync(out + "README.md")) data = data + readFileSync(out + "README.md").toString();
     writeFileSync(out + "README.md", data);
     await git.add("README.md")
     await git.commit("Modify README.md", "README.md", {
-        "--author": '"BradBot1 <BradBot_1@email.com>"'
+        "--author": '"BradBot1 <BradBot_1@outlook.com>"'
     });
 }
