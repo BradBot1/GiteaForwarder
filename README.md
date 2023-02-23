@@ -43,7 +43,7 @@ Environment version of [data.json](https://git.bb1.fun/BradBot_1/GiteaForwarder/
 #### With an environment variable
 
 ```shell
-docker run --name forwarder -e PORT=80 -e DATA='[{"origin":"https://git.example.com/user/repo","recipients":[{"url":"https://gitlab.com/user/repo","authors":[{"old":"user@example.com","email":"00000000+user@users.noreply.github.com","name":"user"}]}]}]' -p 80:80 -d bradbot1/gitea-forwarder
+docker run --name forwarder -e PORT=80 -e DATA='[{"origin":"https://git.example.com/user/repo","recipients":[{"modifyReadme":true,"url":"https://gitlab.com/user/repo","authors":[{"old":"user@example.com","email":"00000000+user@users.noreply.github.com","name":"user"}]}]}]' -p 80:80 -d bradbot1/gitea-forwarder
 ```
 
 #### With a volume mount (preffered)
@@ -108,7 +108,8 @@ source: [docker-compose.yml](https://git.bb1.fun/BradBot_1/GiteaForwarder/src/br
       "email": "00000001+user2@users.noreply.github.com",
       "name": "user2"
      }
-    ]
+    ],
+    "modifyReadme": true
    }
   ]
  }

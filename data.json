@@ -17,7 +17,8 @@
                         "email": "00000001+user2@users.noreply.github.com",
                         "name": "user2"
                     }
-                ]
+                ],
+                "modifyReadme": true
             }
         ]
     }
