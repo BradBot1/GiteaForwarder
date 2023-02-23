@@ -56,7 +56,7 @@ for (const forwardData of parsedData) {
                 continue;
             }
             const recipient = forward.createRecipient(recipientData.url, recipientData.humanName);
-            if (recipient.hasOwnProperty("modifyReadme")) {
+            if (recipientData.hasOwnProperty("modifyReadme")) {
                 recipient.insertToReadme = !!recipientData.modifyReadme;
                 console.log("Readme will be modified on recipient: " + recipient.humanName||recipient.url);
             }
