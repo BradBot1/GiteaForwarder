@@ -13,14 +13,14 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-export type WebhookRecievedCallback = (webhookId: string, webhook: Promise<any>) => void;
+export type WebhookRecievedCallback = (webhookId: string, webhook: any) => void;
 
 export function setupWebhookRoutes(router:any, webhookRecievedCallback:WebhookRecievedCallback):void {
     
     router.post('/webhook/:webhook', (req: any, res: any) => {
         const webhookId = req.params.webhook;
         console.log("[WEB] Recieved webhook " + webhookId);
-        webhookRecievedCallback(webhookId, res.body);
+        webhookRecievedCallback(webhookId, req.body);
         res.statusCode = 200;
         res.end();
     });
