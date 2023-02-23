@@ -31,7 +31,7 @@ export function createServer(port: number, webhookRecievedCallback: WebhookRecie
     });
 
     router.use(require('body-parser').json({
-        limit: '5kb',
+        limit: '25kb',
         strict: true,
         type: "application/json"
     }));
